@@ -33,3 +33,18 @@ output "credentials_retrieved" {
   description = "Status message"
   sensitive   = true
 }
+
+output "rotation_status" {
+  value = {
+    next_rotation = time_rotating.password_rotation.rotation_rfc3339
+    rotation_days = var.rotation_days
+    new_password  = "rotated"
+  }
+  description = "Password rotation status"
+}
+
+output "new_connection_string" {
+  value       = "postgresql://${local.db_credentials.username}:${random_password.rotated_password.result}@${local.db_credentials.host}:${local.db_credentials.port}/${local.db_credentials.database}"
+  description = "Updated PostgreSQL connection string with rotated password"
+  sensitive   = true
+}

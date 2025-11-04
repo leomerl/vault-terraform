@@ -11,7 +11,6 @@ resource "vault_generic_secret" "db_credentials" {
       database          = "postgres"
       username          = "postgres"
       password          = random_password.db_password.result
-      pooler_urls       = data.supabase_pooler.database.url
       created_at        = timestamp()
     }
   })

@@ -4,7 +4,3 @@ resource "supabase_project" "database" {
   database_password = random_password.db_password.result
   region            = var.supabase_region
 }
-
-data "supabase_pooler" "database" {
-  project_ref = supabase_project.database.id
-}
